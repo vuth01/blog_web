@@ -1,0 +1,97 @@
+
+.article-header{
+    height:15rem;
+    background: #555;
+    padding: 2rem 10%;
+    color: #fff;
+}
+
+.article-user-name {
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+}
+.article-user-name b{
+    cursor: pointer;
+}
+.article-user-name b:hover{
+    text-decoration: underline;
+}
+
+.article-header-user-right button{
+    padding:0.25rem 0.4rem;
+    margin-right: 0.2rem;
+    border-radius:5px;
+    border:none;
+}
+/* .article-header-user-right button:first-child{
+    background-color:#ccc;
+}
+.article-header-user-right button:last-child{
+    background-color:#549d54;
+    color:#fff;
+} */
+
+.article-content{
+    margin: 0rem 10%;
+    border-bottom: 1px solid #ccc;
+    padding: 2rem 0rem;
+}
+.article-content-main{
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+    padding-bottom: 2rem;
+}
+.article-content-tag span{
+    color: #aaa;
+    border-radius: 10rem;
+    border: 1px solid #ddd;
+    background:none;
+    font-size: 0.8rem;
+    padding:0.2rem 0.6rem;
+    margin-right: 4px;
+}
+.article-comment{
+    margin: 2rem 10%;
+
+}
+
+.article-header-user-right .btnFollow{
+    background:none;
+    color: #ccc;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.article-header-user-right .btnFollow:hover{
+    background: #ccc;
+    color: #111;
+}
+
+.article-header-user-right .btnFavorite{
+    background:none;
+    color: #549d54;
+    border: 1px solid #549d54;
+}
+
+.article-header-user-right .btnFavorite:hover{
+    color: #fff;
+    background: #549d54;
+}
+
+.list-comments{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2rem;
+}
+
+.comments-item{
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    background: #ddd;
+    border-radius: 1rem;
+}
+
+.comment-delete-icon{
+    cursor: pointer;
+   
+}

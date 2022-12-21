@@ -1,0 +1,24 @@
+.Comments{
+    width: 30rem;
+    margin: auto;
+}
+
+
+.form-comment{
+ display: flex; 
+ justify-content: flex-start;
+}
+
+.form-comment input{
+    min-width: 100%;
+    padding: 0.4rem 2rem;
+    border-radius: 10rem;
+    outline: none;
+}
+
+.form-comment button{
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10rem;
+}

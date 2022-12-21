@@ -1,0 +1,47 @@
+.header{
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 10rem;
+    font-size: 1.2rem;
+    /* position:fixed;
+    width: 100%; */
+}
+
+.header-left:hover{
+    cursor: pointer;
+    color: #ccc;
+}
+
+
+
+.header-right{
+    display: flex;
+    justify-content:space-around;
+}
+.header-right-item{
+    padding:0rem 0.5rem;
+    cursor: pointer;
+}
+
+.clearLink{
+    color:#fff;
+    text-decoration:none;
+}
+
+.header-right-item:hover{
+    color: #ccc;
+}
+.logBtn{
+    background:#fff;
+    color:#000;
+    border: 1px solid #2ee37d;
+    padding:0.25rem 1rem;
+    border-radius:2rem;
+}
+
+.logBtn:hover{
+    background-color: #2ee37d;
+    color: #fff;
+}

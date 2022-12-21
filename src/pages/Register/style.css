@@ -1,0 +1,12 @@
+.Register{
+    background:#ddd;
+    width: 100vw;
+    height: 100vh;
+}
+.title{
+    font-size: 2rem;
+}
+.form-header{
+    text-align: center;
+    transform: translateY(100%);
+}

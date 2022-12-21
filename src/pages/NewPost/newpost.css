@@ -1,0 +1,11 @@
+.edit-form{
+    padding:5rem 20%;
+}
+
+.tags{
+    border:1px solid #999;
+    padding:0.25rem;
+    margin-right: 0.2rem;
+    border-radius:0.5rem;
+    cursor: pointer;
+}

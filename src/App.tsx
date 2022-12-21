@@ -1,25 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Header } from "./components/Header";
+import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+import { store } from "./stores";
+import { Provider } from "react-redux";
+import { Profile } from "./pages/Profile";
+import { SettingUser } from "./pages/SettingUser";
+import { NewPost } from "./pages/NewPost";
+import { ProfileUser } from "./pages/ProfileUser";
+import { Article } from "./pages/Article";
+import { ArticleEdit } from "./pages/ArticleEdit";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    index: true,
+    element: <Home />,
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "register",
+    element: <Register />,
+  },
+
+  {
+    path: "settings",
+    element: <SettingUser />,
+  },
+  {
+    path: "editor",
+    element: <NewPost />,
+  },
+  {
+    path: "profile/:username",
+    element: <ProfileUser />,
+  },
+  {
+    path: "articles/:slug",
+    element: <Article />,
+  },
+  {
+    path: "articles/edit/:slug",
+    element: <ArticleEdit />,
+  },
+  {
+    path: ":username",
+    element: <Profile />,
+  },
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <RouterProvider router={router} fallbackElement={"Loading..."} />
+      </div>
+    </Provider>
   );
 }
 

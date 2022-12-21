@@ -1,0 +1,11 @@
+.Login{
+    background: #ddd;
+    width: 100vw;
+    height: 100vh;
+}
+
+.form-center{
+    width: 30rem;
+    margin: auto;
+    transform: translateY(40%);
+}

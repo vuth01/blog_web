@@ -1,0 +1,23 @@
+.article-edit-btn{
+    background: rgb(212, 212, 212);
+    color: #000;
+    outline: 1px solid #fff;
+}
+
+.article-edit-btn:hover{
+    background: #000;
+    color: #fff;
+    outline: 1px solid #999;
+}
+
+.article-delete-btn{
+    background: rgb(208, 74, 74);
+    color: #fff;
+    outline: 1px solid #fff;
+}
+
+.article-delete-btn:hover{
+    color: rgb(208, 74, 74);
+    background-color: #fff;
+    outline: 1px solid #fff;
+}

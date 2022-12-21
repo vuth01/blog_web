@@ -1,0 +1,15 @@
+.Tag{
+    background: #ddd;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.tagList-item{
+    background:none;
+    cursor: pointer;
+}
+.tagList-item:hover{
+    background:#999;
+}

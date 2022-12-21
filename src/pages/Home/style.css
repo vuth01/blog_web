@@ -1,0 +1,85 @@
+.banner{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background-color: #5cb85c;
+    height:40vh;
+    color:#fff;
+}
+
+.title p{
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.feed-container{
+    display: flex;
+    padding:0px 10%;
+
+}
+.main-feed{
+    flex-basis: 75%;
+    
+}
+.main-tag{
+    flex-basis: 25%;
+}
+
+.post-main{
+    border-bottom: 1px solid #ccc;
+    margin:0px 10px;
+}
+
+.post-header-right button{
+    background-color: transparent;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.725rem;
+    border-radius: 0.2rem;
+    color: #5CB85C;
+    border:1px solid #5CB85C;
+    outline: none;
+}
+.post-header-right button:hover{
+    color: #fff;
+    border-color: #fff;
+    background-color: #5cb85c;
+}
+
+.activeFavorite{
+    color: #fff!important;
+    border-color: #fff!important;
+    background-color: #5cb85c!important;
+}
+
+.post-time{
+    font-weight: 300;
+    color:#bbb;
+}
+
+.post-content-title{
+    cursor: pointer;
+}
+.post-content-description, .post-tagMore-left{
+    font-weight: 300;
+    font-size: 1rem;
+    color:#999;
+    cursor: pointer;
+}
+.post-tagMore-right button{
+    font-weight: 300;
+    font-size: 0.8rem;
+    border: 1px solid #ddd;
+    color: #aaa;
+    background-color: none;
+    border-radius: 10rem;
+    padding:0.25rem;
+}
+
+.post-user-name b{
+    color: #5cb85c;
+    cursor: pointer;
+}
+.post-user-name b:hover{
+    text-decoration:underline;
+}

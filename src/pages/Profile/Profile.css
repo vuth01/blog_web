@@ -1,0 +1,41 @@
+.profile-body-header{
+    background: #ddd;
+    height:15rem;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+.profile-btn button{
+    background: none;
+    border-radius: 5px;
+   text-align: center;
+   padding: 0.5rem;
+   border: 1px solid #999;
+   position: absolute;
+   top: 15rem;
+   right: 20rem;
+   font-size: 0.75rem;
+}
+.profile-btn button:hover{
+    background: #ccc;
+}
+
+.profile-body-main{
+    padding: 0px 20%;
+}
+.profile-body-nav{
+    border-bottom: 1px solid #ccc;
+    font-weight: 600;
+}
+
+.active{
+    padding-bottom: 5px ;
+}
+.active:active{
+    color: #5CB85C ;
+    border-bottom: 2px solid #5CB85C;
+}
+.active:focus{
+    color: #5CB85C ;
+    border-bottom: 2px solid #5CB85C 
+}
