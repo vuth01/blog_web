@@ -15,7 +15,9 @@ export const Tag = () => {
     <>
       <div className="Tag">
         <div className="tag-title">
-          <p className="pb-2">Popular Tag:</p>
+          <p className="pb-2">
+            <b>Popular Tag:</b>
+          </p>
           <div>
             <ListGroup numbered>
               {tags.map((item, index) => (

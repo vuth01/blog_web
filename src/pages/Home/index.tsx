@@ -8,6 +8,7 @@ import moment from "moment";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Spinner } from "react-bootstrap";
 
 export const Home = () => {
   const currentUser = useSelector((store: any) => store.user.user);
@@ -90,7 +91,7 @@ export const Home = () => {
           ) : (
             <div className="banner">
               <div className="title">
-                <h1>Logo</h1>
+                <h1>Medium</h1>
                 <p>A place to share your knowledge.</p>
               </div>
             </div>
@@ -98,7 +99,7 @@ export const Home = () => {
           <div className="feed-container pt-4 mx-1">
             <div className="main-feed">
               <div className="nav-feed">
-                <div className="profile-body-nav d-flex pt-4 pb-2 mx-2">
+                <div className="profile-body-nav d-flex pt-4 mx-2">
                   <div
                     className={
                       isClicked
@@ -128,65 +129,73 @@ export const Home = () => {
                 </div>
               </div>
               <div className="all-post-container mt-4">
-                {data.map((item: any, index: any) => (
-                  <div className="post-main py-4" key={index}>
-                    <div className="post-header d-flex justify-content-between align-items-center">
-                      <div className="post-header-left d-flex align-items-center">
-                        <div className="post-user-img">
-                          <img
-                            width={"32px"}
-                            height={"32px"}
-                            src={item?.author?.image}
-                            className="rounded-circle mx-2"
-                            alt=""
-                          />
+                {data.length > 0 ? (
+                  data.map((item: any, index: any) => (
+                    <div className="post-main py-4" key={index}>
+                      <div className="post-header d-flex justify-content-between align-items-center">
+                        <div className="post-header-left d-flex align-items-center">
+                          <div className="post-user-img">
+                            <img
+                              width={"32px"}
+                              height={"32px"}
+                              src={item?.author?.image}
+                              className="rounded-circle mx-2"
+                              alt=""
+                            />
+                          </div>
+                          <div
+                            className="post-user-name"
+                            onClick={() => handleNavigate(item.author.username)}
+                          >
+                            <b>{item?.author?.username}</b>
+                            <p className="post-time">
+                              {moment(
+                                item?.createdAt?.replace(/\.\w+$/, ""),
+                                "YYYY-MM-DDTHH:mm:ss"
+                              ).format("MMM Do YY")}
+                            </p>
+                          </div>
                         </div>
-                        <div
-                          className="post-user-name"
-                          onClick={() => handleNavigate(item.author.username)}
-                        >
-                          <b>{item?.author?.username}</b>
-                          <p className="post-time">
-                            {moment(
-                              item?.createdAt?.replace(/\.\w+$/, ""),
-                              "YYYY-MM-DDTHH:mm:ss"
-                            ).format("MMM Do YY")}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="post-header-right">
-                        <button
-                          onClick={() => handleFavorite(item)}
-                          className={item?.favorited ? "activeFavorite" : ""}
-                        >
-                          {" "}
-                          <BsHeartFill /> {item?.favoritesCount}
-                        </button>
-                      </div>
-                    </div>
-                    <div
-                      className="post-content py-3"
-                      onClick={() => handlePostNavigate(item)}
-                    >
-                      <div className="post-content-title">
-                        <h3>{item?.title}</h3>
-                      </div>
-                      <div className="post-content-description">
-                        {item?.description}
-                      </div>
-                    </div>
-                    <div className="post-tagMore d-flex justify-content-between align-items-center">
-                      <div className="post-tagMore-left">Readmore...</div>
-                      <div className="post-tagMore-right">
-                        {item?.tagList.map((item: any, index: any) => (
-                          <button className="mx-2" key={index}>
-                            {item}
+                        <div className="post-header-right">
+                          <button
+                            onClick={() => handleFavorite(item)}
+                            className={item?.favorited ? "activeFavorite" : ""}
+                          >
+                            {" "}
+                            <BsHeartFill /> {item?.favoritesCount}
                           </button>
-                        ))}
+                        </div>
+                      </div>
+                      <div
+                        className="post-content py-3"
+                        onClick={() => handlePostNavigate(item)}
+                      >
+                        <div className="post-content-title">
+                          <h3>{item?.title}</h3>
+                        </div>
+                        <div className="post-content-description">
+                          {item?.description}
+                        </div>
+                      </div>
+                      <div className="post-tagMore d-flex justify-content-between align-items-center">
+                        <div className="post-tagMore-left">Readmore...</div>
+                        <div className="post-tagMore-right">
+                          {item?.tagList.map((item: any, index: any) => (
+                            <button className="mx-2" key={index}>
+                              {item}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
+                  ))
+                ) : (
+                  <div className="d-flex justify-content-center align-item-center mt-4">
+                    <Spinner animation="border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
                   </div>
-                ))}
+                )}
               </div>
             </div>
             <div className="main-tag">

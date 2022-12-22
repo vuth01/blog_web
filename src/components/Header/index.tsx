@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { instance } from "../../httpClient";
 import { setUser } from "../../stores";
 import Logo from "../../assets/medium.png";
+import { GoSignIn } from "react-icons/go";
+import { SiGnuprivacyguard } from "react-icons/si";
+
 export const Header = () => {
   const dataUser = useSelector((store: any) => store.user.user);
   const token = sessionStorage.getItem("userToken");
@@ -25,11 +28,6 @@ export const Header = () => {
           </Link>
         </div>
         <div className="header-right">
-          {/* <div className="header-right-item">
-            <Link to="/" className="clearLink">
-              Home
-            </Link>
-          </div> */}
           {token ? (
             <div className="Profile-Logged d-flex ">
               <div className="newPost px-1 header-right-item">
@@ -66,12 +64,12 @@ export const Header = () => {
             <div className="Log-form d-flex">
               <div className="header-right-item">
                 <Link to="/login" className="clearLink logBtn">
-                  Sign In
+                  <GoSignIn /> Sign In
                 </Link>
               </div>
               <div className="header-right-item">
                 <Link to="/register" className="clearLink logBtn">
-                  Sign Up
+                  <SiGnuprivacyguard /> Sign Up
                 </Link>
               </div>
             </div>
