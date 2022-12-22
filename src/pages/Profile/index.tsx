@@ -10,6 +10,7 @@ import moment from "moment";
 export const Profile = () => {
   const userData = useSelector((store: any) => store.user.user);
   const author = userData.username;
+  const [data, setData] = useState<any>([]);
   const [myArticle, setMyArticle] = useState<any>([]);
   const [isClicked, setIsClicked] = useState(false);
 
@@ -36,8 +37,38 @@ export const Profile = () => {
         });
     }
   }, [author, isClicked]);
-  console.log(myArticle);
+  // console.log(myArticle);
+
   const navigate = useNavigate();
+  const handleNavigate = (user: any) => {
+    if (userData.username === user) {
+      navigate(`/@${user}`);
+    } else {
+      navigate(`/profile/${user}`);
+    }
+  };
+
+  const handlePostNavigate = (item: any) => {
+    const username = item.author.username;
+    const slug = item.slug;
+    console.log(username);
+    if (username === userData.username) {
+      navigate(`/articles/edit/${slug}`);
+    } else {
+      navigate(`/articles/${slug}`);
+    }
+  };
+
+  const handleFavorite = (item: any) => {
+    const slug = item.slug;
+    const index = data.indexOf(item);
+    const method = item.favorited ? "delete" : "post";
+    instance[method](`/articles/${slug}/favorite`).then((res: any) => {
+      data[index] = res.data.article;
+      setData([...data]);
+    });
+  };
+
   return (
     <>
       <div className="Profile">
@@ -104,7 +135,10 @@ export const Profile = () => {
                             alt=""
                           />
                         </div>
-                        <div className="post-user-name">
+                        <div
+                          className="post-user-name"
+                          onClick={() => handleNavigate(item.author.username)}
+                        >
                           <b>{item?.author?.username}</b>
                           <p className="post-time">
                             {moment(
@@ -115,13 +149,19 @@ export const Profile = () => {
                         </div>
                       </div>
                       <div className="post-header-right">
-                        <button className={"activeFavorite"}>
+                        <button
+                          className={item?.favorited ? "activeFavorite" : ""}
+                          onClick={() => handleFavorite(item)}
+                        >
                           {" "}
                           <BsHeartFill /> {item?.favoritesCount}
                         </button>
                       </div>
                     </div>
-                    <div className="post-content py-3">
+                    <div
+                      className="post-content py-3"
+                      onClick={() => handlePostNavigate(item)}
+                    >
                       <div className="post-content-title">
                         <h3>{item?.title}</h3>
                       </div>
