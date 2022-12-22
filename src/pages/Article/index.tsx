@@ -48,28 +48,32 @@ export const Article = () => {
     axios
       .get(`https://api.realworld.io/api/articles/${slug}/comments`)
       .then((res: any) => {
-        console.log(res.data);
+        // console.log(res.data);
         setListComments([...res.data.comments]);
       });
   }, []);
   const handleFollow = () => {
-    if (followStatus) {
-      instance.delete(`/profiles/${user}/follow`).then((res: any) => {
-        setFollowStatus(res.data.profile.following);
-      });
-    } else {
-      instance
-        .post(`/profiles/${user}/follow`, {
-          profile: {
-            username: user.username,
-            bio: user.bio,
-            image: user.image,
-            following: true,
-          },
-        })
-        .then((res: any) => {
+    if (token) {
+      if (followStatus) {
+        instance.delete(`/profiles/${user}/follow`).then((res: any) => {
           setFollowStatus(res.data.profile.following);
         });
+      } else {
+        instance
+          .post(`/profiles/${user}/follow`, {
+            profile: {
+              username: user.username,
+              bio: user.bio,
+              image: user.image,
+              following: true,
+            },
+          })
+          .then((res: any) => {
+            setFollowStatus(res.data.profile.following);
+          });
+      }
+    } else {
+      navigate("/login");
     }
   };
 

@@ -20,17 +20,18 @@
     background: #ccc;
 }
 
-.profile-body-main{
+.profile-body-main, .myArticle{
     padding: 0px 20%;
 }
 .profile-body-nav{
     border-bottom: 1px solid #ccc;
     font-weight: 600;
+    cursor: pointer;
 }
 
-.active{
+/* .active{
     padding-bottom: 5px ;
-}
+} */
 .active:active{
     color: #5CB85C ;
     border-bottom: 2px solid #5CB85C;

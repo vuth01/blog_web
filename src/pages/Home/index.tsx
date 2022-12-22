@@ -8,10 +8,13 @@ import moment from "moment";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 export const Home = () => {
   const currentUser = useSelector((store: any) => store.user.user);
   const token = sessionStorage.getItem("userToken");
   const [data, setData] = useState<any>([]);
+  const [isClicked, setIsClicked] = useState(false);
+
   useEffect(() => {
     if (!token) {
       axios
@@ -22,21 +25,32 @@ export const Home = () => {
           setData(res.data.articles);
         });
     } else {
-      instance
-        .get("/articles", { params: { limit: 20, offset: 0 } })
-        .then((res: any) => {
-          setData(res.data.articles);
-        });
+      if (isClicked) {
+        instance
+          .get("/articles/feed", { params: { limit: 20, offset: 0 } })
+          .then((res: any) => {
+            setData(res.data.articles);
+          });
+      } else {
+        instance
+          .get("/articles", { params: { limit: 20, offset: 0 } })
+          .then((res: any) => {
+            setData(res.data.articles);
+          });
+      }
     }
-  }, []);
+  }, [isClicked]);
 
-  // console.log(data);
   const navigate = useNavigate();
   const handleNavigate = (user: any) => {
-    if (currentUser.username === user) {
-      navigate(`/@${user}`);
+    if (!token) {
+      navigate("/login");
     } else {
-      navigate(`/profile/${user}`);
+      if (currentUser.username === user) {
+        navigate(`/@${user}`);
+      } else {
+        navigate(`/profile/${user}`);
+      }
     }
   };
 
@@ -57,11 +71,9 @@ export const Home = () => {
       navigate("/login");
     } else {
       const slug = item.slug;
-      //console.log(item);
       const index = data.indexOf(item);
       const method = item.favorited ? "delete" : "post";
       instance[method](`/articles/${slug}/favorite`).then((res: any) => {
-        //console.log(res.data);
         data[index] = res.data.article;
         setData([...data]);
       });
@@ -87,11 +99,27 @@ export const Home = () => {
             <div className="main-feed">
               <div className="nav-feed">
                 <div className="profile-body-nav d-flex pt-4 pb-2 mx-2">
-                  <div className="myArticles active px-4" tabIndex={1}>
+                  <div
+                    className={
+                      isClicked
+                        ? "myArticles active px-4"
+                        : "myArticles active px-4"
+                    }
+                    tabIndex={1}
+                    onClick={() => setIsClicked(false)}
+                  >
                     Global Feed
                   </div>
                   {token ? (
-                    <div className="favoriteArticles active" tabIndex={2}>
+                    <div
+                      className={
+                        isClicked
+                          ? "myArticles active px-4"
+                          : "myArticles px-4 active"
+                      }
+                      tabIndex={2}
+                      onClick={() => setIsClicked(true)}
+                    >
                       Your Feed
                     </div>
                   ) : (
