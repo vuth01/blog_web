@@ -9,6 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
+import { Pagination } from "../../components/Pagination";
 
 export const Home = () => {
   const currentUser = useSelector((store: any) => store.user.user);
@@ -16,11 +17,19 @@ export const Home = () => {
   const [data, setData] = useState<any>([]);
   const [isClicked, setIsClicked] = useState(false);
 
+  //paginate
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
+
   useEffect(() => {
     if (!token) {
       axios
         .get("https://api.realworld.io/api/articles", {
-          params: { limit: 20, offset: 0 },
+          params: { limit: 100, offset: 0 },
         })
         .then((res: any) => {
           setData(res.data.articles);
@@ -28,13 +37,13 @@ export const Home = () => {
     } else {
       if (isClicked) {
         instance
-          .get("/articles/feed", { params: { limit: 20, offset: 0 } })
+          .get("/articles/feed", { params: { limit: 100, offset: 0 } })
           .then((res: any) => {
             setData(res.data.articles);
           });
       } else {
         instance
-          .get("/articles", { params: { limit: 20, offset: 0 } })
+          .get("/articles", { params: { limit: 100, offset: 0 } })
           .then((res: any) => {
             setData(res.data.articles);
           });
@@ -129,8 +138,8 @@ export const Home = () => {
                 </div>
               </div>
               <div className="all-post-container mt-4">
-                {data.length > 0 ? (
-                  data.map((item: any, index: any) => (
+                {currentPosts.length > 0 ? (
+                  currentPosts.map((item: any, index: any) => (
                     <div className="post-main py-4" key={index}>
                       <div className="post-header d-flex justify-content-between align-items-center">
                         <div className="post-header-left d-flex align-items-center">
@@ -203,6 +212,11 @@ export const Home = () => {
             </div>
           </div>
         </div>
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={data.length}
+          paginate={paginate}
+        />
       </div>
     </>
   );
