@@ -4,16 +4,16 @@ import React, { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { BsPencilFill } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { Comment } from "../../components/Comment";
 import { ModalPopUp } from "../../components/ModalPopUp";
+import { instance } from "../../httpClient";
 export const ArticleEdit = () => {
   const { slug } = useParams();
-
+  const navigate = useNavigate();
   const [article, setArticle] = useState<any>({});
   const [listComment, setListComment] = useState<any>([]);
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -24,7 +24,7 @@ export const ArticleEdit = () => {
       .catch((err: any) => {
         console.log(err);
       });
-  }, []);
+  }, [slug]);
 
   useEffect(() => {
     axios
@@ -32,18 +32,27 @@ export const ArticleEdit = () => {
       .then((res: any) => {
         setListComment(res.data.comments);
       });
-  }, []);
+  }, [slug]);
 
-  const handleEditArticle = () => {};
+  const handleEditArticle = () => {
+    navigate(`/editor/${slug}`);
+  };
 
   const handleDeleteArticle = () => {
-    setIsDeleted(!isDeleted);
+    instance.delete(`/articles/${slug}`).then((res: any) => {
+      console.log(res.data);
+      if (res.status === 204) {
+        navigate("/");
+      } else {
+        console.log("Error Delete Article");
+      }
+    });
   };
 
   return (
     <>
       <Header />
-      <div className="article-edit">
+      <div className="article-edit position-relative">
         <div className="article-header">
           <div className="article-header-title pb-2">
             <h1>{article?.title}</h1>
@@ -72,13 +81,13 @@ export const ArticleEdit = () => {
             <div className="article-header-user-right d-flex align-items-center px-4">
               <button
                 className="article-edit-btn"
-                onClick={() => handleEditArticle}
+                onClick={() => handleEditArticle()}
               >
                 <BsPencilFill /> Edit Article
               </button>
               <button
                 className="article-delete-btn "
-                onClick={() => handleDeleteArticle}
+                onClick={() => setIsOpen(true)}
               >
                 <FaTrash /> Delete Article
               </button>
@@ -130,6 +139,12 @@ export const ArticleEdit = () => {
             <Comment />
           </div> */}
         </div>
+        <ModalPopUp
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          handleDeleteArticle={handleDeleteArticle}
+          className="modal"
+        />
       </div>
     </>
   );

@@ -25,31 +25,39 @@ export const Home = () => {
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
 
+  //tag
+  const [tag, getTag] = useState("");
+  //const [isClickedTrend, setIsClickedTrend] = useState(false);
+  //console.log(tag);
+
   useEffect(() => {
     if (!token) {
       axios
         .get("https://api.realworld.io/api/articles", {
-          params: { limit: 100, offset: 0 },
+          params: { limit: 200, offset: 0 },
         })
         .then((res: any) => {
           setData(res.data.articles);
+          getTag("");
         });
     } else {
       if (isClicked) {
         instance
-          .get("/articles/feed", { params: { limit: 100, offset: 0 } })
+          .get("/articles/feed", { params: { limit: 50, offset: 0 } })
           .then((res: any) => {
             setData(res.data.articles);
+            getTag("");
           });
       } else {
         instance
-          .get("/articles", { params: { limit: 100, offset: 0 } })
+          .get("/articles", { params: { limit: 200, offset: 0 } })
           .then((res: any) => {
             setData(res.data.articles);
+            getTag("");
           });
       }
     }
-  }, [isClicked]);
+  }, [isClicked, token]);
 
   const navigate = useNavigate();
   const handleNavigate = (user: any) => {
@@ -65,7 +73,7 @@ export const Home = () => {
   };
 
   const handlePostNavigate = (item: any) => {
-    console.log(item);
+    //console.log(item);
     const username = item.author.username;
     const slug = item.slug;
     console.log(username);
@@ -131,6 +139,13 @@ export const Home = () => {
                       onClick={() => setIsClicked(true)}
                     >
                       Your Feed
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {tag !== "" ? (
+                    <div className="myArticles active text-success border-bottom border-success">
+                      # {tag}
                     </div>
                   ) : (
                     ""
@@ -208,7 +223,7 @@ export const Home = () => {
               </div>
             </div>
             <div className="main-tag">
-              <Tag />
+              <Tag getTag={getTag} setData={setData} />
             </div>
           </div>
         </div>

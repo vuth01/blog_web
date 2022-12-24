@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./newpost.css";
 import { Header } from "../../components/Header";
 import { Form, Button } from "react-bootstrap";
 import { instance } from "../../httpClient";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 export const NewPost = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -11,13 +11,25 @@ export const NewPost = () => {
   const [tagList, setTagList] = useState<any[]>([]);
   const [tags, setTags] = useState("");
 
+  const { slug } = useParams();
+  //console.log(slug);
   const navigate = useNavigate();
 
-  const handleKeyDown = (e: any) => {
-    if (e.key === "Enter") {
-      setTagList([...tagList, tags]);
-      setTags("");
-    }
+  useEffect(() => {
+    instance.get(`/articles/${slug}`).then((res: any) => {
+      console.log(res.data);
+      if (res.status === 200) {
+        setTitle(res.data.article.title);
+        setDescription(res.data.article.description);
+        setBody(res.data.article.body);
+        //setTags(res.data.article.tagList);
+      }
+    });
+  }, [slug]);
+
+  const handleKeyDown = () => {
+    setTagList([...tagList, tags]);
+    setTags("");
   };
 
   const handleRemove = (index: number) => {
@@ -28,7 +40,29 @@ export const NewPost = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    try {
+
+    if (slug) {
+      instance
+        .put(`/articles/${slug}`, {
+          article: {
+            title: title,
+            description: description,
+            body: body,
+            tagList: tagList,
+          },
+        })
+        .then((res: any) => {
+          if (res.status === 200) {
+            console.log(res.data);
+            setTitle("");
+            setDescription("");
+            setBody("");
+            setTags("");
+            setTagList([]);
+            navigate("/");
+          }
+        });
+    } else {
       instance
         .post("/articles", {
           article: {
@@ -49,8 +83,6 @@ export const NewPost = () => {
             navigate("/");
           }
         });
-    } catch (e) {
-      console.log(e);
     }
   };
 
@@ -60,7 +92,7 @@ export const NewPost = () => {
         <Header />
         <div className="edit-form">
           <div className="edit-title text-center">
-            <h1>New Article</h1>
+            {!slug ? <h1>New Article</h1> : ""}
           </div>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -100,16 +132,25 @@ export const NewPost = () => {
                 placeholder="Enter Tags"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
-                onKeyDown={handleKeyDown}
               />
+              <div className="d-flex justify-content-between">
+                <div className="mt-4">
+                  {tagList.map((item: any, index: number) => (
+                    <span className="tags" key={index}>
+                      <span onClick={() => handleRemove(index)}>x</span> {item}
+                    </span>
+                  ))}
+                </div>
+                <Button
+                  variant="primary"
+                  className="mt-3 "
+                  onClick={() => handleKeyDown()}
+                >
+                  Add Tag
+                </Button>
+              </div>
             </Form.Group>
-            <div>
-              {tagList.map((item: any, index: number) => (
-                <span className="tags" key={index}>
-                  <span onClick={() => handleRemove(index)}>x</span> {item}
-                </span>
-              ))}
-            </div>
+
             <div className="d-flex justify-content-end">
               <Button variant="outline-success" type="submit" size="lg">
                 Publish Articles

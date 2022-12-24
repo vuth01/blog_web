@@ -21,3 +21,10 @@
     background-color: #fff;
     outline: 1px solid #fff;
 }
+
+.modal{ 
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transform: translateY(-235%);       
+}

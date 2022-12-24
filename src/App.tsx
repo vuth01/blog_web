@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Header } from "./components/Header";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
@@ -35,6 +34,10 @@ const router = createBrowserRouter([
   },
   {
     path: "editor",
+    element: <NewPost />,
+  },
+  {
+    path: "editor/:slug",
     element: <NewPost />,
   },
   {

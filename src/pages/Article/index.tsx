@@ -27,8 +27,6 @@ export const Article = () => {
         .get(`https://api.realworld.io/api/articles/${slug}`)
         .then((res: any) => {
           setArticle(res.data.article);
-          //setUser(res.data.article.author);
-          //setFollowStatus(res.data.article.author.following);
         });
     } else {
       instance
@@ -48,10 +46,10 @@ export const Article = () => {
     axios
       .get(`https://api.realworld.io/api/articles/${slug}/comments`)
       .then((res: any) => {
-        // console.log(res.data);
         setListComments([...res.data.comments]);
       });
   }, []);
+
   const handleFollow = () => {
     if (token) {
       if (followStatus) {
@@ -99,10 +97,18 @@ export const Article = () => {
     });
   };
 
+  // console.log(dataUser.username);
+
+  // console.log(listComments);
+
+  const checkToEdit = listComments.find(
+    (item: any) => item.author.username === dataUser.username
+  );
+  console.log(checkToEdit);
+
   return (
     <>
       <Header />
-
       <div className="Article">
         <div className="article-header">
           <div className="article-header-title pb-2">
@@ -191,7 +197,7 @@ export const Article = () => {
                         className="comment-delete-icon"
                         onClick={() => handleDeleteComment(item)}
                       >
-                        {isAuthenticated ? <RiChatDeleteLine /> : ""}
+                        {checkToEdit ? <RiChatDeleteLine /> : ""}
                       </div>
                     </div>
                   </div>
