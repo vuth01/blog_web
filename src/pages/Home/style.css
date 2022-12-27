@@ -3,20 +3,27 @@
     justify-content:center;
     align-items:center;
     text-align:center;
-    background-color: #5cb85c;
-    height:40vh;
-    color:#fff;
+    background-color: hsla(200,40%,30%,.4);
+    height: 80vh;
+    width: 100%;
+    color: #fff;
+    background: url("https://wallpaperaccess.com/full/84248.png");    
+    background-repeat:no-repeat;
+    background-position: center center;
+    object-fit: contain;
 }
-
 .title p{
     font-size: 1.5rem;
     font-weight: 300;
 }
 
+.home-container{
+    background: rgb(240, 240, 240);
+
+}
 .feed-container{
     display: flex;
     padding:0px 10%;
-
 }
 .main-feed{
     flex-basis: 75%;
@@ -27,8 +34,16 @@
 }
 
 .post-main{
-    border-bottom: 1px solid #ccc;
-    margin:0px 10px;
+    border: 1px solid #ccc;
+    margin:5px 10px;
+    padding: 1rem;
+    box-shadow: 2px 2px gray ;
+    border-radius: 1rem;
+    background: #fff;
+}
+
+.post-main:hover{
+    transform: translateY(-2px);
 }
 
 .post-header-right button{

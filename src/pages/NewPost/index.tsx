@@ -12,17 +12,16 @@ export const NewPost = () => {
   const [tags, setTags] = useState("");
 
   const { slug } = useParams();
-  //console.log(slug);
   const navigate = useNavigate();
 
   useEffect(() => {
     instance.get(`/articles/${slug}`).then((res: any) => {
-      console.log(res.data);
+      //console.log(res.data);
       if (res.status === 200) {
         setTitle(res.data.article.title);
         setDescription(res.data.article.description);
         setBody(res.data.article.body);
-        //setTags(res.data.article.tagList);
+        setTagList(res.data.article.tagList);
       }
     });
   }, [slug]);
@@ -34,7 +33,7 @@ export const NewPost = () => {
 
   const handleRemove = (index: number) => {
     const remove = tagList.filter((_, item: any) => item !== index);
-    console.log(remove);
+    //console.log(remove);
     setTagList(remove);
   };
 
@@ -92,7 +91,7 @@ export const NewPost = () => {
         <Header />
         <div className="edit-form">
           <div className="edit-title text-center">
-            {!slug ? <h1>New Article</h1> : ""}
+            {!slug ? <h1>New Article</h1> : <h1>Edit Article</h1>}
           </div>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -150,7 +149,6 @@ export const NewPost = () => {
                 </Button>
               </div>
             </Form.Group>
-
             <div className="d-flex justify-content-end">
               <Button variant="outline-success" type="submit" size="lg">
                 Publish Articles

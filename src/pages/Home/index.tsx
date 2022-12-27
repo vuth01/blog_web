@@ -27,8 +27,6 @@ export const Home = () => {
 
   //tag
   const [tag, getTag] = useState("");
-  //const [isClickedTrend, setIsClickedTrend] = useState(false);
-  //console.log(tag);
 
   useEffect(() => {
     if (!token) {
@@ -73,7 +71,6 @@ export const Home = () => {
   };
 
   const handlePostNavigate = (item: any) => {
-    //console.log(item);
     const username = item.author.username;
     const slug = item.slug;
     console.log(username);

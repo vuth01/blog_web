@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./header.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsFillGearFill, BsPencilSquare } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { instance } from "../../httpClient";
@@ -15,10 +15,12 @@ export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    instance.get("/user").then((res: any) => {
-      dispatch(setUser({ ...res.data.user }));
-    });
-  }, []);
+    if (token) {
+      instance.get("/user").then((res: any) => {
+        dispatch(setUser({ ...res.data.user }));
+      });
+    }
+  }, [token]);
   return (
     <>
       <div className="header">

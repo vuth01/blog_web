@@ -20,7 +20,7 @@ export const Tag = ({ getTag, setData }: any) => {
         },
       })
       .then((res: any) => {
-        console.log(res.data);
+        // console.log(res.data);
         setData(res.data.articles);
       });
   };

@@ -36,9 +36,9 @@
 .logBtn{
     background:#fff;
     color:#000;
-    border: 1px solid #2ee37d;
+    /* border: 1px solid #2ee37d; */
     padding:0.25rem 1rem;
-    border-radius:2rem;
+    border-radius:0.5rem;
 }
 
 .logBtn:hover{

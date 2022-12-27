@@ -13,7 +13,7 @@ export const ModalPopUp = ({ isOpen, setIsOpen, handleDeleteArticle }: any) => {
         </Modal.Header>
 
         <Modal.Body>
-          <p>Are You Sure To Delete This Article?</p>
+          <p>Do you want to delete this article?</p>
         </Modal.Body>
 
         <Modal.Footer>

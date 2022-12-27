@@ -20,7 +20,7 @@ export const Article = () => {
   const [user, setUser] = useState<any>({});
   const navigate = useNavigate();
   const [listComments, setListComments] = useState<any>([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+
   useEffect(() => {
     if (!token) {
       axios
@@ -40,7 +40,7 @@ export const Article = () => {
           console.log(err);
         });
     }
-  }, []);
+  }, [slug, token]);
 
   useEffect(() => {
     axios
@@ -48,7 +48,7 @@ export const Article = () => {
       .then((res: any) => {
         setListComments([...res.data.comments]);
       });
-  }, []);
+  }, [slug]);
 
   const handleFollow = () => {
     if (token) {
@@ -96,15 +96,6 @@ export const Article = () => {
       setListComments(cmt);
     });
   };
-
-  // console.log(dataUser.username);
-
-  // console.log(listComments);
-
-  const checkToEdit = listComments.find(
-    (item: any) => item.author.username === dataUser.username
-  );
-  console.log(checkToEdit);
 
   return (
     <>
@@ -197,7 +188,11 @@ export const Article = () => {
                         className="comment-delete-icon"
                         onClick={() => handleDeleteComment(item)}
                       >
-                        {checkToEdit ? <RiChatDeleteLine /> : ""}
+                        {item.author.username === dataUser.username ? (
+                          <RiChatDeleteLine />
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                   </div>
