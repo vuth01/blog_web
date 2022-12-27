@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { instance } from "../../httpClient";
 import { Spinner } from "react-bootstrap";
 import moment from "moment";
+import { Pagination } from "../../components/Pagination";
 export const Profile = () => {
   const userData = useSelector((store: any) => store.user.user);
   const author = userData.username;
@@ -58,6 +59,12 @@ export const Profile = () => {
       navigate(`/articles/${slug}`);
     }
   };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = myArticle.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
 
   const handleFavorite = (item: any) => {
     const slug = item.slug;
@@ -120,8 +127,8 @@ export const Profile = () => {
             </div>
           </div>
           <div className="article-container">
-            {myArticle.length > 0 ? (
-              myArticle.map((item: any) => (
+            {currentPosts.length > 0 ? (
+              currentPosts.map((item: any) => (
                 <div className="myArticle" key={item.slug}>
                   <div className="post-main py-4">
                     <div className="post-header d-flex justify-content-between align-items-center">
@@ -190,6 +197,11 @@ export const Profile = () => {
               </div>
             )}
           </div>
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={myArticle.length}
+            paginate={paginate}
+          />
         </div>
       </div>
     </>

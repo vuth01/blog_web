@@ -25,7 +25,6 @@ export const Login = () => {
   });
 
   const onSubmit = (value: any) => {
-    // console.log(value);
     try {
       instance
         .post("/users/login", {

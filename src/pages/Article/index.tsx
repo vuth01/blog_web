@@ -116,7 +116,7 @@ export const Article = () => {
                   alt=""
                 />
               </div>
-              <div className="article-user-name">
+              <div className="article-user-name pb-3">
                 <b
                   onClick={() =>
                     navigate(`/profile/${article?.author?.username}`)

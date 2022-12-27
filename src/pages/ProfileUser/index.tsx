@@ -6,6 +6,7 @@ import { FaPlus } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/Header";
+import { Pagination } from "../../components/Pagination";
 import { instance } from "../../httpClient";
 export const ProfileUser = () => {
   const currentUser = useSelector((store: any) => store.user.user);
@@ -14,6 +15,13 @@ export const ProfileUser = () => {
   const { username } = useParams();
   const [data, setDataArticle] = useState<any>([]);
   const [isClicked, setIsClicked] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     instance.get(`/profiles/${username}`).then((res: any) => {
@@ -142,8 +150,8 @@ export const ProfileUser = () => {
               </div>
             </div>
             <div className="article-user">
-              {data.length > 0 ? (
-                data.map((item: any, index: any) => (
+              {currentPosts.length > 0 ? (
+                currentPosts.map((item: any, index: any) => (
                   <div className="post-main py-4" key={index}>
                     <div className="post-header d-flex justify-content-between align-items-center">
                       <div className="post-header-left d-flex align-items-center">
@@ -211,6 +219,11 @@ export const ProfileUser = () => {
               )}
             </div>
           </div>
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={data.length}
+            paginate={paginate}
+          />
         </div>
       </div>
     </>

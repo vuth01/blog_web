@@ -8,7 +8,7 @@ export const Pagination = ({ postsPerPage, totalPosts, paginate }: any) => {
   }
 
   return (
-    <nav className="paginate">
+    <nav className="paginate d-flex justify-content-center">
       <ul className="pagination">
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">

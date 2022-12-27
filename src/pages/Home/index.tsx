@@ -116,9 +116,7 @@ export const Home = () => {
                 <div className="profile-body-nav d-flex pt-4 mx-2">
                   <div
                     className={
-                      isClicked
-                        ? "myArticles active px-4"
-                        : "myArticles active px-4"
+                      isClicked ? "myArticles px-4" : "myArticles active px-4"
                     }
                     tabIndex={1}
                     onClick={() => setIsClicked(false)}
@@ -223,12 +221,14 @@ export const Home = () => {
               <Tag getTag={getTag} setData={setData} />
             </div>
           </div>
+          <div className="home-paginate d-flex justify-content-start">
+            <Pagination
+              postsPerPage={postsPerPage}
+              totalPosts={data.length}
+              paginate={paginate}
+            />
+          </div>
         </div>
-        <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={data.length}
-          paginate={paginate}
-        />
       </div>
     </>
   );

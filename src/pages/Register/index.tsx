@@ -63,7 +63,7 @@ export const Register = () => {
   });
 
   const onSubmit = (value: any) => {
-    console.log(value);
+    //console.log(value);
     try {
       instance
         .post("/users", {

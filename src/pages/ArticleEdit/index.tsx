@@ -68,7 +68,7 @@ export const ArticleEdit = () => {
                   alt=""
                 />
               </div>
-              <div className="article-user-name ">
+              <div className="article-user-name pb-3 ">
                 <b>{article?.author?.username}</b>
                 <p className="post-time">
                   {moment(
