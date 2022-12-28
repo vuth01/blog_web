@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./settingUser.css";
 import { Header } from "../../components/Header";
 import { Form, Button } from "react-bootstrap";
@@ -15,6 +15,7 @@ export const SettingUser = () => {
   const [bio, setBio] = useState(dataUser.bio);
   const [email, setEmail] = useState(dataUser.email);
   const [password, setPassword] = useState("");
+  const [avatar, setAvatar] = useState(dataUser.image);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (e: any) => {
@@ -32,7 +33,6 @@ export const SettingUser = () => {
         })
         .then((res: any) => {
           if (res.status === 200) {
-            //  console.log(res.data.user.token);
             dispatch(setUser({ ...res.data.user }));
             sessionStorage.setItem("userToken", res.data.user.token);
             navigate(`/@${username}`);
@@ -46,12 +46,20 @@ export const SettingUser = () => {
     sessionStorage.removeItem("userToken");
     navigate("/");
   };
+
+  useEffect(() => {
+    setAvatar(image);
+  }, [image]);
+
   return (
     <>
       <div className="Settings">
         <Header />
         <div className="setting-title text-center pt-4">
-          <h1>Your Settings</h1>
+          <h1>Your Profile</h1>
+        </div>
+        <div className="setting-avatar d-flex justify-content-center">
+          <img src={avatar} alt="" />
         </div>
         <div className="setting-form">
           <Form onSubmit={handleSubmit}>

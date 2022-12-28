@@ -221,7 +221,7 @@ export const Home = () => {
               <Tag getTag={getTag} setData={setData} />
             </div>
           </div>
-          <div className="home-paginate d-flex justify-content-start">
+          <div className="home-paginate d-flex flex-wrap justify-content-start">
             <Pagination
               postsPerPage={postsPerPage}
               totalPosts={data.length}

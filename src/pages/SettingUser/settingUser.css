@@ -1,3 +1,9 @@
 .setting-form{
     padding:0px 30rem;
 }
+.setting-avatar img{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
