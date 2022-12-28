@@ -8,12 +8,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ModalPopUp } from "../../components/ModalPopUp";
 import { instance } from "../../httpClient";
+import { Comment } from "../../components/Comment";
+import { RiChatDeleteLine } from "react-icons/ri";
 export const ArticleEdit = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [article, setArticle] = useState<any>({});
   const [listComment, setListComment] = useState<any>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [listComments, setListComments] = useState<any>([]);
 
   useEffect(() => {
     axios
@@ -26,12 +29,18 @@ export const ArticleEdit = () => {
       });
   }, [slug]);
 
+  // useEffect(() => {
+  //   axios
+  //     .get(`https://api.realworld.io/api/articles/${slug}/comments`)
+  //     .then((res: any) => {
+  //       setListComment(res.data.comments);
+  //     });
+  // }, [slug]);
+
   useEffect(() => {
-    axios
-      .get(`https://api.realworld.io/api/articles/${slug}/comments`)
-      .then((res: any) => {
-        setListComment(res.data.comments);
-      });
+    instance.get(`/articles/${slug}/comments`).then((res: any) => {
+      setListComments([...res.data.comments]);
+    });
   }, [slug]);
 
   const handleEditArticle = () => {
@@ -46,6 +55,14 @@ export const ArticleEdit = () => {
       } else {
         console.log("Error Delete Article");
       }
+    });
+  };
+
+  const handleDeleteComment = (item: any) => {
+    const id = item.id;
+    instance.delete(`/articles/${slug}/comments/${id}`).then((res: any) => {
+      const cmt = listComments.filter((item: any) => item.id !== id);
+      setListComments(cmt);
     });
   };
 
@@ -104,8 +121,8 @@ export const ArticleEdit = () => {
         </div>
         <div className="article-comment">
           <div className="list-comments">
-            {listComment.length > 0 ? (
-              listComment.map((item: any, index: number) => (
+            {listComments.length > 0 ? (
+              listComments.map((item: any, index: number) => (
                 <div
                   className="comments-item d-flex aligns-items-center mb-4"
                   key={index}
@@ -126,7 +143,12 @@ export const ArticleEdit = () => {
                     <p className="d-flex justify-content-center align-item-center">
                       {item.body}
                     </p>
-                    <div className="comment-delete-icon"></div>
+                    <div
+                      className="comment-delete-icon px-2"
+                      onClick={() => handleDeleteComment(item)}
+                    >
+                      <RiChatDeleteLine />
+                    </div>
                   </div>
                 </div>
               ))
@@ -135,9 +157,13 @@ export const ArticleEdit = () => {
             )}
           </div>
 
-          {/* <div className="article-post-comment">
-            <Comment />
-          </div> */}
+          <div className="article-post-comment">
+            <Comment
+              slug={slug}
+              listComments={listComments}
+              setListComments={setListComments}
+            />
+          </div>
         </div>
         <ModalPopUp
           isOpen={isOpen}

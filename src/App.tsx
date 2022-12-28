@@ -12,7 +12,7 @@ import { NewPost } from "./pages/NewPost";
 import { ProfileUser } from "./pages/ProfileUser";
 import { Article } from "./pages/Article";
 import { ArticleEdit } from "./pages/ArticleEdit";
-
+import { PrivateRoute } from "./components/PrivateRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,15 +30,27 @@ const router = createBrowserRouter([
 
   {
     path: "settings",
-    element: <SettingUser />,
+    element: (
+      <PrivateRoute>
+        <SettingUser />
+      </PrivateRoute>
+    ),
   },
   {
     path: "editor",
-    element: <NewPost />,
+    element: (
+      <PrivateRoute>
+        <NewPost />
+      </PrivateRoute>
+    ),
   },
   {
     path: "editor/:slug",
-    element: <NewPost />,
+    element: (
+      <PrivateRoute>
+        <NewPost />
+      </PrivateRoute>
+    ),
   },
   {
     path: "profile/:username",

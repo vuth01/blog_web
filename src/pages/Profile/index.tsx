@@ -95,13 +95,12 @@ export const Profile = () => {
             </div>
             <div className="profile-btn">
               <button onClick={() => navigate("/settings", { replace: true })}>
-                <BsFillGearFill />
-                Edit Profile Settings
+                <BsFillGearFill className="mb-1" /> Edit Profile Settings
               </button>
             </div>
           </div>
           <div className="profile-body-main">
-            <div className="profile-body-nav d-flex pt-4">
+            <div className="profile-body-nav d-flex pt-4 mb-4">
               <div
                 className={
                   isClicked

@@ -43,12 +43,18 @@ export const Article = () => {
   }, [slug, token]);
 
   useEffect(() => {
-    axios
-      .get(`https://api.realworld.io/api/articles/${slug}/comments`)
-      .then((res: any) => {
+    if (token) {
+      instance.get(`/articles/${slug}/comments`).then((res: any) => {
         setListComments([...res.data.comments]);
       });
-  }, [slug]);
+    } else {
+      axios
+        .get(`https://api.realworld.io/api/articles/${slug}/comments`)
+        .then((res: any) => {
+          setListComments([...res.data.comments]);
+        });
+    }
+  }, [slug, token]);
 
   const handleFollow = () => {
     if (token) {
@@ -185,7 +191,7 @@ export const Article = () => {
                         {item.body}
                       </p>
                       <div
-                        className="comment-delete-icon"
+                        className="comment-delete-icon px-2"
                         onClick={() => handleDeleteComment(item)}
                       >
                         {item.author.username === dataUser.username ? (

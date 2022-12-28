@@ -32,8 +32,9 @@ export const SettingUser = () => {
         })
         .then((res: any) => {
           if (res.status === 200) {
-            console.log(res.data);
+            //  console.log(res.data.user.token);
             dispatch(setUser({ ...res.data.user }));
+            sessionStorage.setItem("userToken", res.data.user.token);
             navigate(`/@${username}`);
           }
         });

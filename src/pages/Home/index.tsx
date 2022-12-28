@@ -113,7 +113,7 @@ export const Home = () => {
           <div className="feed-container pt-4 mx-1">
             <div className="main-feed">
               <div className="nav-feed">
-                <div className="profile-body-nav d-flex pt-4 mx-2">
+                <div className="profile-body-nav d-flex pt-4 mx-2 mb-4">
                   <div
                     className={
                       isClicked ? "myArticles px-4" : "myArticles active px-4"
