@@ -104,7 +104,7 @@ export const Register = () => {
           </div>
           <div className="form-center">
             <Form onSubmit={formik.handleSubmit}>
-              <Form.Group className="mb-3" controlId="formBasicUsername">
+              <Form.Group className="mb-2" controlId="formBasicUsername">
                 <Form.Label>Username:</Form.Label>
                 <Form.Control
                   type="text"
@@ -113,13 +113,16 @@ export const Register = () => {
                   placeholder="Username"
                   onChange={formik.handleChange}
                 />
+              </Form.Group>
+              <p>
+                {" "}
                 <b className="text-danger">
                   {formik.touched.username && formik.errors.username
                     ? formik.errors.username
                     : ""}
                 </b>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              </p>
+              <Form.Group className="mb-2" controlId="formBasicEmail">
                 <Form.Label>Email address:</Form.Label>
                 <Form.Control
                   type="email"
@@ -128,14 +131,18 @@ export const Register = () => {
                   placeholder="Enter email"
                   onChange={formik.handleChange}
                 />
+
+                <Form.Text className="text-muted"></Form.Text>
+              </Form.Group>
+              <p>
+                {" "}
                 <b className="text-danger">
                   {formik.touched.email && formik.errors.email
                     ? formik.errors.email
                     : ""}
                 </b>
-                <Form.Text className="text-muted"></Form.Text>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              </p>
+              <Form.Group className="mb-1" controlId="formBasicPassword">
                 <Form.Label>Password:</Form.Label>
                 <Form.Control
                   type="password"
@@ -144,12 +151,15 @@ export const Register = () => {
                   placeholder="Password"
                   onChange={formik.handleChange}
                 />
+              </Form.Group>
+              <p className="mb-2">
+                {" "}
                 <b className="text-danger">
                   {formik.touched.password && formik.errors.password
                     ? formik.errors.password
                     : ""}
                 </b>
-              </Form.Group>
+              </p>
               <Button variant="primary" type="submit">
                 Register
               </Button>

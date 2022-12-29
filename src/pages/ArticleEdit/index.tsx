@@ -127,17 +127,22 @@ export const ArticleEdit = () => {
                   className="comments-item d-flex aligns-items-center mb-4"
                   key={index}
                 >
-                  <div className="comments-item-left">
+                  <div className="comments-item-left d-flex justify-content-center aligns-items-center">
                     <img
                       src={item.author.image}
                       alt="avt"
                       className="rounded-circle"
-                      width={"30px"}
-                      height={"30px"}
+                      width={"40px"}
+                      height={"40px"}
                     />
-                    <b className="px-2 font-weight-bold">
-                      {item.author.username}
-                    </b>
+                    <div className="d-flex flex-column justify-content-center">
+                      <b className="px-2 font-weight-bold">
+                        {item.author.username}
+                      </b>
+                      <span className="time-comment">
+                        {moment(item.updatedAt).startOf("second").fromNow()}
+                      </span>
+                    </div>
                   </div>
                   <div className="comment-item-right px-2 d-flex justify-content-between align-item-center">
                     <p className="d-flex justify-content-center align-item-center">

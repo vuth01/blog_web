@@ -32,7 +32,7 @@ export const Header = () => {
         <div className="header-right">
           {token ? (
             <div className="Profile-Logged d-flex ">
-              <div className="newPost px-1 header-right-item">
+              <div className="newPost px-1 header-right-item clearLink">
                 <Link to="/editor" className="clearLink">
                   {" "}
                   <BsPencilSquare /> Write
@@ -64,7 +64,7 @@ export const Header = () => {
             </div>
           ) : (
             <div className="Log-form d-flex">
-              <div className="header-right-item">
+              <div className="header-right-item clearLink">
                 <Link to="/login" className="clearLink logBtn">
                   <GoSignIn /> Sign In
                 </Link>

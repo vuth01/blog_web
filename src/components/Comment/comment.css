@@ -9,11 +9,15 @@
  justify-content: flex-start;
 }
 
+.form-user img{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 .form-comment input{
     min-width: 100%;
     padding: 0.4rem 2rem;
     border-radius: 10rem;
     outline: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .form-comment button{
@@ -21,4 +25,10 @@
     margin-left: 0.5rem;
     padding: 0.5rem 1rem;
     border-radius: 10rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
+.form-comment button:hover{
+    background-color: rgb(166, 166, 166);
 }
