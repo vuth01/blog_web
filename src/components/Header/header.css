@@ -6,7 +6,8 @@
     padding: 1rem 10rem;
     font-size: 1.2rem;
     /* position:fixed;
-    width: 100%; */
+    width: 100%;
+    z-index: 100; */
     box-shadow: rgba(255, 255, 255, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
@@ -41,6 +42,6 @@
 }
 
 .logBtn:hover{
-    background-color: #2ee37d;
+    background-color: #ccc;
     color: #fff;
 }

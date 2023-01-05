@@ -13,6 +13,7 @@ import { Pagination } from "../../components/Pagination";
 
 export const Home = () => {
   const currentUser = useSelector((store: any) => store.user.user);
+  const navigate = useNavigate();
   const token = sessionStorage.getItem("userToken");
   const [data, setData] = useState<any>([]);
   const [isClicked, setIsClicked] = useState(false);
@@ -57,7 +58,6 @@ export const Home = () => {
     }
   }, [isClicked, token]);
 
-  const navigate = useNavigate();
   const handleNavigate = (user: any) => {
     if (!token) {
       navigate("/login");
@@ -116,7 +116,9 @@ export const Home = () => {
                 <div className="profile-body-nav d-flex pt-4 mx-2 mb-4">
                   <div
                     className={
-                      isClicked ? "myArticles px-4" : "myArticles active px-4"
+                      isClicked
+                        ? "myArticles  px-4"
+                        : "myArticles active onActiveStart px-4"
                     }
                     tabIndex={1}
                     onClick={() => setIsClicked(false)}

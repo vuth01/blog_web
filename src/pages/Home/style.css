@@ -4,7 +4,7 @@
     align-items:center;
     text-align:center;
     background-color: hsla(200,40%,30%,.4);
-    height: 80vh;
+    height: 100vh;
     width: 100%;
     color: #fff;
     background: url("https://wallpaperaccess.com/full/84248.png");    
@@ -90,6 +90,12 @@
     background-color: none;
     border-radius: 10rem;
     padding:0.25rem;
+}
+
+.onActiveStart{
+    background-color: #f0f0f0;
+    border-bottom: 2px solid #5cb85c;
+    color: #5CB85C;
 }
 
 .post-user-name b{

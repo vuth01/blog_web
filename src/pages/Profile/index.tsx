@@ -102,10 +102,11 @@ export const Profile = () => {
           <div className="profile-body-main">
             <div className="profile-body-nav d-flex pt-4 mb-4">
               <div
+                style={{ backgroundColor: "#fff" }}
                 className={
                   isClicked
                     ? "myArticles active px-4"
-                    : "myArticles active px-4"
+                    : "myArticles active onActiveStart px-4"
                 }
                 tabIndex={1}
                 onClick={() => setIsClicked(false)}
